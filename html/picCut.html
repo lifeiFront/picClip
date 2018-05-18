@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/baike_video_content.css">
+    <script src="../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+<div class="popup ">
+    <div class="popup-clip ">
+        <div class="popup-clip-wrap ">
+            <!--剪裁区域 start-->
+            <div class="popup-clip-box ">
+                <div class="popup-clip-boxa ">
+                    <div class="popup-clip-boxb ">
+                        <div class="popup-clip-boxc ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--剪裁区域 end-->
+            <div class="popup-clip-txt "><span>图片要求：</span>图片中不得含有电话、QQ、水印等</div>
+            <div class="popup-clip-scale ">
+                <a href="javascript:; " class="popup-clip-s ">缩小</a>
+                <a href="javascript:; " class="popup-clip-l ">放大</a>
+            </div>
+        </div>
+        <div class="popup-clip-opr ">
+            <a href="javascript:; " class="popup-clip-confirm ">确定</a>
+            <a href="javascript:; " class="popup-clip-cancel ">取消</a>
+        </div>
+    </div>
+</div>
+<div class="cropped">
+
+</div>
+<script src="../js/picClip.js"></script>
+<script>
+    let clipobj = new picClip({
+        imgSrc: '../images/avatar.png'
+    });
+    $('.popup-clip-s').on('click', function (e) {
+        clipobj.zoomOut();
+    });
+    $('.popup-clip-l').on('click', function (e) {
+        clipobj.zoomIn();
+    });
+
+    $('#file').on('change', function () {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            let imgSrc = e.target.result;
+            //可在选择后构建裁切实例
+        }
+        reader.readAsDataURL(this.files[0]);
+        // this.files = [];
+    })
+    $('.popup-clip-confirm ').on('click', function () {
+        let img = clipobj.getDataURL();
+        $('.cropped').append('<img src="' + img + '">');
+    })
+</script>
+</body>
+</html>
